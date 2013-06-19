@@ -7,13 +7,13 @@ int getQ(unsigned char C);
 
 int main(int argc, char *argv[])
 {
-	/*
-	1   = 0 000001
-	2   = 1 000010
-	4   = 2 000100
-	8   = 3 001000
-	16  = 4 010000
-	32  = 5 100000
+	/* input pins to LUT KEY
+	1   = 0 100000
+	2   = 1 010000
+	4   = 2 001000
+	8   = 3 000100
+	16  = 4 000010
+	32  = 5 000001
 
 	Lookup table 0-127 (128 symbols) outputs LSB Q and !Q (via assert)
 	*/
@@ -26,10 +26,13 @@ int main(int argc, char *argv[])
 	const unsigned char MAXLUTIN = 252; // 000000** - 111111** inclusive.
 	const unsigned char MAXLUTOUT = 2;  // ******00 - ******10 (so 01 and 10)
 	unsigned char i = 0;
-	for (;i<=(MAXLUTIN+MAXLUTOUT);i++) {
+	for (i=0;i<=(MAXLUTIN+MAXLUTOUT);i++) {
 		if (get_bit_from_char(i, 0) != get_bit_from_char(i,1)) {
 			lut6.lut=i;			
-			printf("%d - Q=%d  - Q_PRIME=%d\n",lut6.lut,getQ(lut6.lut),!getQ(lut6.lut));
+			printf("%d\tQ=%d\tQ_PRIME=%d\t",lut6.lut,getQ(lut6.lut),!getQ(lut6.lut));
+			printf("BINARY: ");
+			outputter(i);
+			
 		}
 	}	
 	return 0;
@@ -37,7 +40,6 @@ int main(int argc, char *argv[])
 
 int getQ(unsigned char C)
 {
-assert(get_bit_from_char(C, 1) != get_bit_from_char(C,0)); // guarantees that the output is never indeterminate
+assert(get_bit_from_char(C, 0) != get_bit_from_char(C,1));
 return(get_bit_from_char(C, 1));
 }
-
