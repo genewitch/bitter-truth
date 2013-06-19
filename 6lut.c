@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
 int getQ(unsigned char C)
 {
-assert(get_bit_from_char(C, 1) != get_bit_from_char(C,0));
+assert(get_bit_from_char(C, 1) != get_bit_from_char(C,0)); // guarantees that the output is never indeterminate
 return(get_bit_from_char(C, 1));
 }
 
