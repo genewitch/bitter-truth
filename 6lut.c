@@ -43,3 +43,4 @@ int getQ(unsigned char C)
 assert(get_bit_from_char(C, 0) != get_bit_from_char(C,1));
 return(get_bit_from_char(C, 1));
 }
+
