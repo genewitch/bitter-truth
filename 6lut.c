@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "tests.h"
 #include "struct.h"
+#include "utils.h"
 
 int getQ(unsigned char C);
 
